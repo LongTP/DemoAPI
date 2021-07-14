@@ -775,7 +775,7 @@
                             console.log('xStop-xStart= ' + Math.abs(app.indexStopJ - app.indexStartJ) + '  yStop-yStart= ' + Math.abs(app.indexStopI - app.indexStartI) + " Giá trị tuyệt đối");
                             if ((Math.abs(app.indexStopI - app.indexStartI) == 2 && Math.abs(app.indexStopJ - app.indexStartJ) == 2) && (app.indexStopI >= 5)) {
                                 //TH1 phải trên
-                                var flag1 = true;
+                                
 
                                 if ((app.indexStopJ - app.indexStartJ == 2) && (app.indexStopI - app.indexStartI) == -2) {
                                     
@@ -790,6 +790,32 @@
                                         app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
                                         app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left , app.chessMatrix[app.indexStopI][app.indexStopJ].top , this.id)
                                        
+                                        app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                        app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                        app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                        app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                        flag = true;
+                                        return;
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                //TH2 trái trên
+                                if ((app.indexStopJ - app.indexStartJ == -2) && (app.indexStopI - app.indexStartI) == -2) {
+
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top - app.squares, "check") == 0
+                                        && app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left - app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top - app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                        app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+
                                         app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
                                         app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
                                         app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");

@@ -797,12 +797,11 @@
                                         flag = true;
                                         return;
                                     }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
                                 }
-                                else {
-                                    app.revert(originalleft, originaltop, this.id);
-                                    return;
-                                }
-
                             }
 
                         }

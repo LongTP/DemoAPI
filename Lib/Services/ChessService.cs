@@ -21,12 +21,12 @@ namespace Lib.Services
         public void Save() {
             unitOfWork.Commit();
         }
-        public void insertRoom(Room r) {
-            roomRepository.Add(r);
-            Save();
-        }
-        public List<Room> getAllRoom() {
-            return roomRepository.GetAllRooms();
-        }
+        //public void insertRoom(Room r) {
+        //    roomRepository.Add(r);
+        //    Save();
+        //}
+        //public List<Room> getAllRoom() {
+        //    return roomRepository.GetAllRooms();
+        //}
     }
 }

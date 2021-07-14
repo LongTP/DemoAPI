@@ -27,16 +27,16 @@ namespace DemoAPI.Controllers
             _dbContext.Student.Add(st);
             _dbContext.SaveChanges();
             */
-            insertRoom();
+            //insertRoom();
 
 
             return View();
         }
-        public void insertRoom() {
-            Room r = new Room();
-            r.Id = Guid.NewGuid();
-            r.Name = "test";
-            chessService.insertRoom(r);
-        }
+        //public void insertRoom() {
+        //    Room r = new Room();
+        //    r.Id = Guid.NewGuid();
+        //    r.Name = "test";
+        //    chessService.insertRoom(r);
+        //}
     }
 }

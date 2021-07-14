@@ -13,33 +13,33 @@ namespace DemoAPI.Controllers.api
     {
         ChessService chessService = new ChessService();
         
-        [Route("api/chess/insertroom")]
-        [HttpPost]
-        public ActionResult insertroom(RoomModel rmodel)
-        {
-            Room r = new Room();
-            r.Id = Guid.NewGuid();
-            r.Name = rmodel.RoomName;
-            chessService.insertRoom(r);
-            return
-            Json(new
-            {
-                message = "success",
-               // data = stList //_dbContext.Student.OrderBy(s=>s.Id).Skip(2).Take(3).ToList() //Where(s=>s.Id == Guid.Parse(id)).FirstOrDefault()
-            }, JsonRequestBehavior.AllowGet);
-        }
-        [Route("api/chess/getrooms")]
-        [HttpGet]
-        public ActionResult getallroom()
-        {
-            List<Room> roomList = chessService.getAllRoom();
-            return
-            Json(new
-            {
-                message = "success",
-                data = roomList //_dbContext.Student.OrderBy(s=>s.Id).Skip(2).Take(3).ToList() //Where(s=>s.Id == Guid.Parse(id)).FirstOrDefault()
-            }, JsonRequestBehavior.AllowGet);
-        }
+        //[Route("api/chess/insertroom")]
+        //[HttpPost]
+        //public ActionResult insertroom(RoomModel rmodel)
+        //{
+        //    Room r = new Room();
+        //    r.Id = Guid.NewGuid();
+        //    r.Name = rmodel.RoomName;
+        //    chessService.insertRoom(r);
+        //    return
+        //    Json(new
+        //    {
+        //        message = "success",
+        //       // data = stList //_dbContext.Student.OrderBy(s=>s.Id).Skip(2).Take(3).ToList() //Where(s=>s.Id == Guid.Parse(id)).FirstOrDefault()
+        //    }, JsonRequestBehavior.AllowGet);
+        //}
+        //[Route("api/chess/getrooms")]
+        //[HttpGet]
+        //public ActionResult getallroom()
+        //{
+        //    List<Room> roomList = chessService.getAllRoom();
+        //    return
+        //    Json(new
+        //    {
+        //        message = "success",
+        //        data = roomList //_dbContext.Student.OrderBy(s=>s.Id).Skip(2).Take(3).ToList() //Where(s=>s.Id == Guid.Parse(id)).FirstOrDefault()
+        //    }, JsonRequestBehavior.AllowGet);
+        //}
         [Route("api/chess/getchessnode")]
         [HttpPost]
         public ActionResult getAllNode(List<MoveModel> movelist)

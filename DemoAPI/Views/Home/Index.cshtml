@@ -253,6 +253,7 @@
                                 //var node = $("#" + this.id);
                                 //node.css({ 'top': app.chessMatrix[app.indexStopI][app.indexStopJ].top + 'px' });
                                 //node.css({ 'left': app.chessMatrix[app.indexStopI][app.indexStopJ].left + 'px' });
+                                //Tự sửa đoạn này đi quý vị
                                 app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                 
@@ -267,7 +268,8 @@
                                 (Math.abs(app.indexStopI - app.indexStartI) == 1 && Math.abs(app.indexStopJ - app.indexStartJ) == 0))
                                 && (app.indexStopJ >= 3 && app.indexStopJ <= 5 && app.indexStopI >= 7 && app.indexStopI <= 9) &&
                                 app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id) != 1) {
-                                app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                //app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                //Tự sửa đoạn này đi quý vị
                                 app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
 
@@ -339,6 +341,7 @@
                                         app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
                                         app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                         flag = true;
+                                    //Tự sửa đoạn này đi quý vị
                                 }
                             }
                             if (app.indexStartI >=5) {

@@ -247,49 +247,44 @@
                         var flag = false;
                         if (this.id.indexOf("chutuongdo") >= 0) {
                             if (((Math.abs(app.indexStopI - app.indexStartI) == 0 && Math.abs(app.indexStopJ - app.indexStartJ) == 1) ||
-                                (Math.abs(app.indexStopI - app.indexStartI) == 1 && Math.abs(app.indexStopJ - app.indexStartJ) == 0))
-                                && (app.indexStopJ >= 3 && app.indexStopJ <= 5 && app.indexStopI >= 0 && app.indexStopI <= 2) &&
-                                app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id) != 1) {
-                                //var node = $("#" + this.id);
-                                //node.css({ 'top': app.chessMatrix[app.indexStopI][app.indexStopJ].top + 'px' });
-                                //node.css({ 'left': app.chessMatrix[app.indexStopI][app.indexStopJ].left + 'px' });
-                                //Tự sửa đoạn này đi quý vị
+                                (Math.abs(app.indexStopI - app.indexStartI) == 1 && Math.abs(app.indexStopJ - app.indexStartJ) == 0)) &&
+                                (app.indexStopJ >= 3 && app.indexStopJ <= 5 && app.indexStopI >= 0 && app.indexStopI <= 2) &&
+                                app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                console.log('hasChessNode: ' + app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id));
+                                app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
                                 app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
-                                
+
+                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                 flag = true;
-                                
+
+                                return;
                             }
                         }
                         if (this.id.indexOf("chutuongden") >= 0) {
                             //console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
                             //console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
                             if (((Math.abs(app.indexStopI - app.indexStartI) == 0 && Math.abs(app.indexStopJ - app.indexStartJ) == 1) ||
-                                (Math.abs(app.indexStopI - app.indexStartI) == 1 && Math.abs(app.indexStopJ - app.indexStartJ) == 0))
-                                && (app.indexStopJ >= 3 && app.indexStopJ <= 5 && app.indexStopI >= 7 && app.indexStopI <= 9) &&
-                                app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id) != 1) {
-                                //app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
-                                //Tự sửa đoạn này đi quý vị
+                                (Math.abs(app.indexStopI - app.indexStartI) == 1 && Math.abs(app.indexStopJ - app.indexStartJ) == 0)) &&
+                                (app.indexStopJ >= 3 && app.indexStopJ <= 5 && app.indexStopI >= 7 && app.indexStopI <= 9) &&
+                                app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                console.log('hasChessNode: ' + app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id))
+                                app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
                                 app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
 
+                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                 flag = true;
+
+                                return;
                             }    
                         }
                        
-                        if (this.id.indexOf("ma") >= 0) {
-                            console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
-                            console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
-                            console.log('xStop-xStart= ' + Math.abs(app.indexStopJ - app.indexStartJ) + '  yStop-yStart= ' + Math.abs(app.indexStopI - app.indexStartI)+" Giá trị tuyệt đối");
-                            if (((Math.abs(app.indexStopI - app.indexStartI) == 2 && Math.abs(app.indexStopJ - app.indexStartJ) == 1) ||
-                                (Math.abs(app.indexStopI - app.indexStartI) == 1 && Math.abs(app.indexStopJ - app.indexStartJ) == 2))&&
-                                app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id) != 1) {
-                                app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
-                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
 
-                                flag = true;
-                            }
-                        }
                         if (this.id.indexOf("totden") >= 0) {
                             console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
                             console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
@@ -336,22 +331,32 @@
                             console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
                             console.log('xStop-xStart= ' + Math.abs(app.indexStopJ - app.indexStartJ) + '  yStop-yStart= ' + Math.abs(app.indexStopI - app.indexStartI)+" Giá trị tuyệt đối");
                             if (app.indexStartI <= 4) {
-                                if (((app.indexStopI - app.indexStartI == 1) && Math.abs(app.indexStopJ - app.indexStartJ) == 0) &&
-                                        app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id) != 1) {
-                                        app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
-                                        app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
-                                        flag = true;
-                                    //Tự sửa đoạn này đi quý vị
+                                if ((app.indexStopI - app.indexStartI == 1 && app.indexStopJ - app.indexStartJ == 0) &&
+                                    app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                    console.log('hasChessNode: ' + app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id))
+                                    app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                    app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                    app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                    app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                    app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                    app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                    flag = true;
+                                    return;
                                 }
                             }
                             if (app.indexStartI >=5) {
-                                if (((app.indexStopI - app.indexStartI == 1 && Math.abs(app.indexStopJ - app.indexStartJ) == 0) ||
-                                    (Math.abs(app.indexStopI - app.indexStartI) == 0 && Math.abs(app.indexStopJ - app.indexStartJ) == 1)) &&
-                                    app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id) != 1) {
+                                if (((app.indexStopI - app.indexStartI) == 1 && Math.abs(app.indexStopJ - app.indexStartJ) == 0 ||
+                                    (app.indexStopI - app.indexStartI == 0 && Math.abs(app.indexStopJ - app.indexStartJ) == 1)) &&
+                                    app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                    console.log('hasChessNode: ' + app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id))
+                                    app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
                                     app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                    app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                    app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
                                     app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
-
+                                    app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                     flag = true;
+                                    return;
                                 }
                             }
                         }
@@ -359,17 +364,437 @@
                             console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
                             console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
                             console.log('xStop-xStart= ' + Math.abs(app.indexStopJ - app.indexStartJ) + '  yStop-yStart= ' + Math.abs(app.indexStopI - app.indexStartI)+" Giá trị tuyệt đối");
-                            if ((Math.abs(app.indexStopI - app.indexStartI) == 1 && Math.abs(app.indexStopJ - app.indexStartJ) == 1)
-                                && (app.indexStopJ >= 3 && app.indexStopJ <= 5 && app.indexStopI >= 7 && app.indexStopI <= 9) &&
-                                app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id) != 1) {
+                            if ((app.indexStopI - app.indexStartI == -1 && app.indexStopJ - app.indexStartJ == -1 || app.indexStopI - app.indexStartI == 1 && app.indexStopJ - app.indexStartJ == 1) && (app.indexStopJ >= 3 && app.indexStopJ <= 5 && app.indexStopI >= 7 && app.indexStopI <= 9) &&
+                                app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                console.log('hasChessNode: ' + app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id))
+                                app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
                                 app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
-
+                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                 flag = true;
+                                return;
                             }
-                           
+                            if ((app.indexStopI - app.indexStartI == 1 && app.indexStopJ - app.indexStartJ == -1 || app.indexStopI - app.indexStartI == -1 && app.indexStopJ - app.indexStartJ == 1) && (app.indexStopJ >= 3 && app.indexStopJ <= 5 && app.indexStopI >= 7 && app.indexStopI <= 9) &&
+                                app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                console.log('hasChessNode: ' + app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id))
+                                app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                flag = true;
+                                return;
+                            }
                         }
-
+                        if (this.id.indexOf("sido") >= 0) {
+                            console.log('xStop-xStart= ' + Math.abs(app.indexStopJ - app.indexStartJ) + '  yStop-yStart= ' + Math.abs(app.indexStopI - app.indexStartI) + " Giá trị tuyệt đối");
+                            if ((app.indexStopI - app.indexStartI == 1 && app.indexStopJ - app.indexStartJ == 1 || app.indexStopI - app.indexStartI == -1 && app.indexStopJ - app.indexStartJ == -1) && (app.indexStopJ >= 3 && app.indexStopJ <= 5 && app.indexStopI >= 0 && app.indexStopI <= 2) &&
+                                app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                console.log('hasChessNode: ' + app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id))
+                                app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                flag = true;
+                                return;
+                            }
+                            if ((app.indexStopI - app.indexStartI == 1 && app.indexStopJ - app.indexStartJ == -1 || app.indexStopI - app.indexStartI == -1 && app.indexStopJ - app.indexStartJ == 1) && (app.indexStopJ >= 3 && app.indexStopJ <= 5 && app.indexStopI >= 0 && app.indexStopI <= 2) &&
+                                app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                console.log('hasChessNode: ' + app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id))
+                                app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                flag = true;
+                                return;
+                            }
+                        }
+                        if (this.id.indexOf("maden") >= 0) {
+                            console.log('J stop= ' + app.indexStopJ + '  I stop= ' + app.indexStopI);
+                            console.log('J start= ' + app.indexStartJ + '  I start= ' + app.indexStartI);
+                            console.log('xStop-xStart= ' + Math.abs(app.indexStopJ - app.indexStartJ) + '  yStop-yStart= ' + Math.abs(app.indexStopI - app.indexStartI) + " Giá trị tuyệt đối");
+                            if ((Math.abs(app.indexStopI - app.indexStartI) == 2 && Math.abs(app.indexStopJ - app.indexStartJ) == 1)
+                                || (Math.abs(app.indexStopI - app.indexStartI) == 1 && Math.abs(app.indexStopJ - app.indexStartJ) == 2)) {
+                                //TH1 phải trên 1 , -2 
+                                if ((app.indexStopJ - app.indexStartJ == 1) && (app.indexStopI - app.indexStartI) == -2) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top - app.squares, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left + app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top - app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                if ((app.indexStopJ - app.indexStartJ == 2 && app.indexStopI - app.indexStartI) == -1) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left + app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top - app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                //TH2 trái trên -1 , -2
+                                if ((app.indexStopJ - app.indexStartJ == -1 && app.indexStopI - app.indexStartI) == -2) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top - app.squares, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left - app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top - app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                //TH2 trái trên -2 , -1
+                                if ((app.indexStopJ - app.indexStartJ == -2 && app.indexStopI - app.indexStartI) == -1) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left - app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top - app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top + app.squares, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left + app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top + app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                //TH3 phải dưới 2 , 1 
+                                if ((app.indexStopJ - app.indexStartJ == 2 && app.indexStopI - app.indexStartI) == 1) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left + app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top + app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                //TH4 trái dưới -1 , 2 
+                                if ((app.indexStopJ - app.indexStartJ == -1) && (app.indexStopI - app.indexStartI) == 2) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top + app.squares, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left - app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top + app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                //TH4 trái dưới -2 , 1 
+                                if ((app.indexStopJ - app.indexStartJ == -2 && app.indexStopI - app.indexStartI) == 1) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left - app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top + app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                        if (this.id.indexOf("mado") >= 0) {
+                            console.log('J stop= ' + app.indexStopJ + '  I stop= ' + app.indexStopI);
+                            console.log('J start= ' + app.indexStartJ + '  I start= ' + app.indexStartI);
+                            console.log('xStop-xStart= ' + Math.abs(app.indexStopJ - app.indexStartJ) + '  yStop-yStart= ' + Math.abs(app.indexStopI - app.indexStartI) + " Giá trị tuyệt đối");
+                            if ((Math.abs(app.indexStopI - app.indexStartI) == 2 && Math.abs(app.indexStopJ - app.indexStartJ) == 1)
+                                || (Math.abs(app.indexStopI - app.indexStartI) == 1 && Math.abs(app.indexStopJ - app.indexStartJ) == 2)) {
+                                //TH1 phải trên 1 , -2 
+                                if ((app.indexStopJ - app.indexStartJ == 1) && (app.indexStopI - app.indexStartI) == -2) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top - app.squares, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left + app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top - app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                //TH1 phải trên 2 , -1 
+                                if ((app.indexStopJ - app.indexStartJ == 2 && app.indexStopI - app.indexStartI) == -1) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left + app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top - app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                //TH2 trái trên -1 , -2
+                                if ((app.indexStopJ - app.indexStartJ == -1 && app.indexStopI - app.indexStartI) == -2) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top - app.squares, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left - app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top - app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                //TH2 trái trên -2 , -1
+                                if ((app.indexStopJ - app.indexStartJ == -2 && app.indexStopI - app.indexStartI) == -1) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left - app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top - app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                //TH3 phải dưới 1 , 2 
+                                if ((app.indexStopJ - app.indexStartJ == 1) && (app.indexStopI - app.indexStartI) == 2) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top + app.squares, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left + app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top + app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                //TH3 phải dưới 2 , 1 
+                                if ((app.indexStopJ - app.indexStartJ == 2 && app.indexStopI - app.indexStartI) == 1) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left + app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top + app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                //TH4 trái dưới -1 , 2 
+                                if ((app.indexStopJ - app.indexStartJ == -1) && (app.indexStopI - app.indexStartI) == 2) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top + app.squares, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left - app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top + app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                //TH4 trái dưới -2 , 1 
+                                if ((app.indexStopJ - app.indexStartJ == -2 && app.indexStopI - app.indexStartI) == 1) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left - app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top + app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                        
+                            
+                        
                         if (this.id.indexOf("phaoden") >= 0) {
                             //if ((Math.abs(app.indexStopI - app.indexStartI) == 0 && Math.abs(app.indexStopJ - app.indexStartJ) >= 1 && Math.abs(app.indexStopJ - app.indexStartJ) <= 8) ||
                             //    (Math.abs(app.indexStopI - app.indexStartI) >= 1 && Math.abs(app.indexStopJ - app.indexStartJ) == 0 && Math.abs(app.indexStopI - app.indexStartI) <= 9)) {
@@ -614,6 +1039,236 @@
                                 }
                             }
                         }
+                        if (this.id.indexOf("phaodo") >= 0) {
+                            //if ((Math.abs(app.indexStopI - app.indexStartI) == 0 && Math.abs(app.indexStopJ - app.indexStartJ) >= 1 && Math.abs(app.indexStopJ - app.indexStartJ) <= 8) ||
+                            //    (Math.abs(app.indexStopI - app.indexStartI) >= 1 && Math.abs(app.indexStopJ - app.indexStartJ) == 0 && Math.abs(app.indexStopI - app.indexStartI) <= 9)) {
+                            if ((app.indexStopI != app.indexStartI && app.indexStopJ == app.indexStartJ) ||
+                                (app.indexStopI == app.indexStartI && app.indexStopJ != app.indexStartJ)) {
+                                // TH1 sang trái
+                                if ((Math.abs(app.indexStopI - app.indexStartI) == 0) && (Math.max(app.indexStartJ, app.indexStopJ) == app.indexStartJ)) {
+                                    var flag1 = true;
+                                    var index = 1;
+                                    var count = 0;
+                                    var length = Math.abs(app.indexStopJ - app.indexStartJ);
+                                    for (index; index < length; index++) {
+                                        console.log('index: ' + index + ' Math.abs(app.indexStopJ - app.indexStartJ) ' + length);
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left) - (index * app.squares), (app.chessMatrix[app.indexStartI][app.indexStartJ].top), "check");
+                                        if (app.hasChessNode(app.chessMatrix[app.CheckI][app.CheckJ].left, app.chessMatrix[app.CheckI][app.CheckJ].top, app.chessMatrix[app.CheckI][app.CheckJ].id) != 0) {
+                                            //nếu trên đường đi có vật cản thì flag = false
+                                            count++;
+                                            flag1 = false;
+                                        }
+                                    }
+                                    console.log('check i j= ' + app.CheckI + ' ' + app.CheckJ + ' StopI=' + app.indexStopI + ' StopJ=' + app.indexStopJ + ' flag' + flag);
+                                    if (flag1 == true) {
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left - (length * app.squares)), (app.chessMatrix[app.indexStartI][app.indexStartJ].top), "stop");
+                                        // Nếu không có vật cản thì di chuyển đến Stop : =1 đích đến có quân, =0 đích đến là ô trống
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id) == 0) {
+                                            app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left - (length * app.squares)), (app.chessMatrix[app.indexStartI][app.indexStartJ].top), "stop");
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                        else {
+                                            app.revert(originalleft, originaltop, this.id);
+                                            return;
+                                        }
+                                    }
+                                    if (flag1 == false) {
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left - (length * app.squares)), (app.chessMatrix[app.indexStartI][app.indexStartJ].top), "stop");
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id) == 1) {
+                                            //  app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left - (2 * app.squares)), (app.chessMatrix[app.indexStartI][app.indexStartJ].top - (2 * app.squares)), "Stop");
+                                            if (app.chessMatrix[app.indexStopI][app.indexStopJ].id.indexOf("den") >= 0 && count == 1) {
+                                                console.log('check i j= ' + app.CheckI + ' ' + app.CheckJ + ' StopI=' + app.indexStopI + ' StopJ=' + app.indexStopJ + ' chess node id=' + app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                                app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                                app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                                flag = true;
+                                                return;
+                                            }
+                                            else {
+                                                app.revert(originalleft, originaltop, this.id);
+                                                return;
+                                            }
+                                        }
+                                    }
+                                }
+                                // TH2 lên trên
+                                if ((Math.abs(app.indexStopJ - app.indexStartJ) == 0) && (Math.max(app.indexStartI, app.indexStopI) == app.indexStartI)) {
+                                    var flag1 = true;
+                                    var index = 1;
+                                    var count = 0;
+                                    var length = Math.abs(app.indexStopI - app.indexStartI);
+                                    for (index; index < length; index++) {
+                                        console.log('index: ' + index + ' Math.abs(app.indexStopJ - app.indexStartJ) ' + Math.abs(app.indexStopI - app.indexStartI));
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left), (app.chessMatrix[app.indexStartI][app.indexStartJ].top) - (index * app.squares), "check");
+                                        if (app.hasChessNode(app.chessMatrix[app.CheckI][app.CheckJ].left, app.chessMatrix[app.CheckI][app.CheckJ].top, app.chessMatrix[app.CheckI][app.CheckJ].id) != 0) {
+                                            //nếu trên đường đi có vật cản thì flag = false
+                                            count++;
+                                            flag1 = false;
+                                        }
+                                    }
+                                    console.log('check i j= ' + app.CheckI + ' ' + app.CheckJ + ' StopI=' + app.indexStopI + ' StopJ=' + app.indexStopJ + ' flag1 ' + flag1);
+                                    if (flag1 == true) {
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left), (app.chessMatrix[app.indexStartI][app.indexStartJ].top - (length * app.squares)), "stop");
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id) == 0) {
+                                            app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left), (app.chessMatrix[app.indexStartI][app.indexStartJ].top - (length * app.squares)), "stop");
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                        else {
+                                            app.revert(originalleft, originaltop, this.id);
+                                            return;
+                                        }
+                                    }
+                                    if (flag1 == false) {
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left), (app.chessMatrix[app.indexStartI][app.indexStartJ].top - (length * app.squares)), "stop");
+                                        // Nếu không có vật cản thì di chuyển đến Stop : =1 đích đến có quân, =0 đích đến là ô trống
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id) == 1) {
+                                            //  app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left - (2 * app.squares)), (app.chessMatrix[app.indexStartI][app.indexStartJ].top - (2 * app.squares)), "stop");
+                                            if (app.chessMatrix[app.indexStopI][app.indexStopJ].id.indexOf("den") >= 0 && count == 1) {
+                                                console.log('check i j= ' + app.CheckI + ' ' + app.CheckJ + ' StopI=' + app.indexStopI + ' StopJ=' + app.indexStopJ + ' chess node id ' + app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                                app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                                app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                                flag = true;
+                                                return;
+                                            }
+                                            else {
+                                                app.revert(originalleft, originaltop, this.id);
+                                                return;
+                                            }
+                                        }
+                                    }
+                                }
+                                // TH3 sang phải
+                                if ((Math.abs(app.indexStopI - app.indexStartI) == 0) && (Math.max(app.indexStartJ, app.indexStopJ) == app.indexStopJ)) {
+                                    var flag1 = true;
+                                    var index = 1;
+                                    var count = 0;
+                                    var length = Math.abs(app.indexStopJ - app.indexStartJ);
+                                    for (index; index < length; index++) {
+                                        console.log('index: ' + index + ' Math.abs(app.indexStopJ - app.indexStartJ) ' + Math.abs(app.indexStopJ - app.indexStartJ));
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left) + (index * app.squares), (app.chessMatrix[app.indexStartI][app.indexStartJ].top), "check");
+                                        if (app.hasChessNode(app.chessMatrix[app.CheckI][app.CheckJ].left, app.chessMatrix[app.CheckI][app.CheckJ].top, app.chessMatrix[app.CheckI][app.CheckJ].id) != 0) {
+                                            //nếu trên đường đi có vật cản thì flag = false
+                                            count++;
+                                            flag1 = false;
+                                        }
+                                    }
+                                    if (flag1 == true) {
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left + (length * app.squares)), (app.chessMatrix[app.indexStartI][app.indexStartJ].top), "stop");
+                                        // Nếu không có vật cản thì di chuyển đến Stop : =1 đích đến có quân, =0 đích đến là ô trống
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id) == 0) {
+                                            app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left + (length * app.squares)), (app.chessMatrix[app.indexStartI][app.indexStartJ].top), "stop");
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                        else {
+                                            app.revert(originalleft, originaltop, this.id);
+                                            return;
+                                        }
+                                    }
+                                    if (flag1 == false) {
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left + (length * app.squares)), (app.chessMatrix[app.indexStartI][app.indexStartJ].top), "stop");
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id) == 1) {
+                                            //  app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left - (2 * app.squares)), (app.chessMatrix[app.indexStartI][app.indexStartJ].top - (2 * app.squares)), "Stop");
+                                            if (app.chessMatrix[app.indexStopI][app.indexStopJ].id.indexOf("den") >= 0 && count == 1) {
+                                                console.log('check i j= ' + app.CheckI + ' ' + app.CheckJ + ' StopI=' + app.indexStopI + ' StopJ=' + app.indexStopJ + ' chess node id ' + app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                                app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                                app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                                flag = true;
+                                                return;
+                                            }
+                                            else {
+                                                app.revert(originalleft, originaltop, this.id);
+                                                return;
+                                            }
+                                        }
+                                    }
+                                }
+                                // TH4 xuống dưới
+                                if ((Math.abs(app.indexStopJ - app.indexStartJ) == 0) && (Math.max(app.indexStartI, app.indexStopI) == app.indexStopI)) {
+                                    var flag1 = true;
+                                    var index = 1;
+                                    var count = 0;
+                                    var length = Math.abs(app.indexStopI - app.indexStartI);
+                                    for (index; index < length; index++) {
+                                        console.log('index: ' + index + ' Math.abs(app.indexStopJ - app.indexStartJ) ' + Math.abs(app.indexStopI - app.indexStartI));
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left), (app.chessMatrix[app.indexStartI][app.indexStartJ].top) + (index * app.squares), "check");
+                                        if (app.hasChessNode(app.chessMatrix[app.CheckI][app.CheckJ].left, app.chessMatrix[app.CheckI][app.CheckJ].top, app.chessMatrix[app.CheckI][app.CheckJ].id) != 0) {
+                                            //nếu trên đường đi có vật cản thì flag = false
+                                            count++;
+                                            flag1 = false;
+                                        }
+                                    }
+                                    if (flag1 == true) {
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left), (app.chessMatrix[app.indexStartI][app.indexStartJ].top + (length * app.squares)), "stop");
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id) == 0) {
+                                            app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left), (app.chessMatrix[app.indexStartI][app.indexStartJ].top + (length * app.squares)), "stop");
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                        else {
+                                            app.revert(originalleft, originaltop, this.id);
+                                            return;
+                                        }
+                                    }
+                                    if (flag1 == false) {
+                                        // Nếu không có vật cản thì di chuyển đến Stop : =1 đích đến có quân, =0 đích đến là ô trống
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left), (app.chessMatrix[app.indexStartI][app.indexStartJ].top + (length * app.squares)), "stop");
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStopI][app.indexStopJ].id) == 1) {
+                                            //  app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left - (2 * app.squares)), (app.chessMatrix[app.indexStartI][app.indexStartJ].top - (2 * app.squares)), "Stop");
+                                            if (app.chessMatrix[app.indexStopI][app.indexStopJ].id.indexOf("den") >= 0 && count == 1) {
+                                                console.log('check i j= ' + app.CheckI + ' ' + app.CheckJ + ' StopI=' + app.indexStopI + ' StopJ=' + app.indexStopJ + ' chess node id' + app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                                app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                                app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                                app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                                app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                                flag = true;
+                                                return;
+                                            }
+                                            else {
+                                                app.revert(originalleft, originaltop, this.id);
+                                                return;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                                                
                         if (this.id.indexOf("xeden") >= 0) {
                             console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
                             console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
@@ -769,6 +1424,151 @@
                                 }
                             }
                         }
+                        if (this.id.indexOf("xedo") >= 0) {
+                            console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                            console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                            //console.log('xStop-xStart= ' + Math.abs(app.indexStopJ - app.indexStartJ) + '  yStop-yStart= ' + Math.abs(app.indexStopI - app.indexStartI) + " Giá trị tuyệt đối");
+                            if ((app.indexStopI != app.indexStartI && app.indexStopJ == app.indexStartJ) ||
+                                (app.indexStopI == app.indexStartI && app.indexStopJ != app.indexStartJ)) {
+                                //TH1 trên
+                                if ((Math.abs(app.indexStopJ - app.indexStartJ) == 0) && (Math.max(app.indexStartI, app.indexStopI) == app.indexStartI)) {
+                                    var length = Math.abs(app.indexStopI - app.indexStartI);
+                                    var flag1 = true;
+                                    var index = 1;
+                                    for (index; index < length; index++) {
+                                        console.log('index: ' + index + ' Math.abs(app.indexStopI - app.indexStartI) ' + Math.abs(app.indexStopI - app.indexStartI));
+                                        app.getIndex(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top - (index * app.squares), "check");
+                                        if (app.hasChessNode(app.chessMatrix[app.CheckI][app.CheckJ].left, app.chessMatrix[app.CheckI][app.CheckJ].top, app.chessMatrix[app.CheckI][app.CheckJ].id) != 0) {
+                                            //nếu trên đường đi có vật cản thì flag = false
+                                            flag1 = false;
+                                        }
+                                    }
+                                    if (flag1 == true) {
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left), (app.chessMatrix[app.indexStartI][app.indexStartJ].top - (length * app.squares)), "stop");
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            console.log('hasChessNode: ' + app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id))
+                                            console.log('check i j= ' + app.CheckI + ' ' + app.CheckJ + ' StopI=' + app.indexStopI + ' StopJ=' + app.indexStopJ + ' chess node id: ' + app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            //app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left), (app.chessMatrix[app.indexStartI][app.indexStartJ].top - (length * app.squares)), "stop");
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                        else {
+                                            app.revert(originalleft, originaltop, this.id);
+                                            return;
+                                        }
+                                    }
+                                }
+                                //TH2 trái
+                                if ((Math.abs(app.indexStopI - app.indexStartI) == 0) && (Math.max(app.indexStartJ, app.indexStopJ) == app.indexStartJ)) {
+                                    var length = Math.abs(app.indexStopJ - app.indexStartJ);
+                                    var flag1 = true;
+                                    var index = 1;
+                                    for (index; index < length; index++) {
+                                        console.log('index: ' + index + ' Math.abs(app.indexStopJ - app.indexStartJ) ' + Math.abs(app.indexStopI - app.indexStartI));
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left) - (index * app.squares), (app.chessMatrix[app.indexStartI][app.indexStartJ].top), "check");
+                                        if (app.hasChessNode(app.chessMatrix[app.CheckI][app.CheckJ].left, app.chessMatrix[app.CheckI][app.CheckJ].top, app.chessMatrix[app.CheckI][app.CheckJ].id) != 0) {
+                                            //nếu trên đường đi có vật cản thì flag = false
+                                            flag1 = false;
+                                        }
+                                    }
+                                    if (flag1 == true) {
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left - (length * app.squares)), app.chessMatrix[app.indexStartI][app.indexStartJ].top, "stop");
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            console.log('hasChessNode: ' + app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id))
+                                            console.log('check i j= ' + app.CheckI + ' ' + app.CheckJ + ' StopI=' + app.indexStopI + ' StopJ=' + app.indexStopJ + ' chess node id: ' + app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            //app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left), (app.chessMatrix[app.indexStartI][app.indexStartJ].top - (length * app.squares)), "stop");
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                        else {
+                                            app.revert(originalleft, originaltop, this.id);
+                                            return;
+                                        }
+                                    }
+                                }
+                                //TH3 phải
+                                if ((Math.abs(app.indexStopI - app.indexStartI) == 0) && (Math.max(app.indexStartJ, app.indexStopJ) == app.indexStopJ)) {
+                                    var length = Math.abs(app.indexStopJ - app.indexStartJ);
+                                    var flag1 = true;
+                                    var index = 1;
+                                    for (index; index < length; index++) {
+                                        console.log('index: ' + index + ' Math.abs(app.indexStopJ - app.indexStartJ) ' + Math.abs(app.indexStopI - app.indexStartI));
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left) + (index * app.squares), (app.chessMatrix[app.indexStartI][app.indexStartJ].top), "check");
+                                        if (app.hasChessNode(app.chessMatrix[app.CheckI][app.CheckJ].left, app.chessMatrix[app.CheckI][app.CheckJ].top, app.chessMatrix[app.CheckI][app.CheckJ].id) != 0) {
+                                            //nếu trên đường đi có vật cản thì flag = false
+                                            flag1 = false;
+                                        }
+                                    }
+                                    if (flag1 == true) {
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left + (length * app.squares)), app.chessMatrix[app.indexStartI][app.indexStartJ].top, "stop");
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            console.log('hasChessNode: ' + app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id))
+                                            console.log('check i j= ' + app.CheckI + ' ' + app.CheckJ + ' StopI=' + app.indexStopI + ' StopJ=' + app.indexStopJ + ' chess node id: ' + app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            //app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left), (app.chessMatrix[app.indexStartI][app.indexStartJ].top - (length * app.squares)), "stop");
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                        else {
+                                            app.revert(originalleft, originaltop, this.id);
+                                            return;
+                                        }
+                                    }
+                                }
+                                //TH4 dưới
+                                if ((Math.abs(app.indexStopJ - app.indexStartJ) == 0) && (Math.max(app.indexStartI, app.indexStopI) == app.indexStopI)) {
+                                    var length = Math.abs(app.indexStopI - app.indexStartI);
+                                    var flag1 = true;
+                                    var index = 1;
+                                    for (index; index < length; index++) {
+                                        console.log('index: ' + index + ' Math.abs(app.indexStopI - app.indexStartI) ' + Math.abs(app.indexStopI - app.indexStartI));
+                                        app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left), (app.chessMatrix[app.indexStartI][app.indexStartJ].top) + (index * app.squares), "check");
+                                        if (app.hasChessNode(app.chessMatrix[app.CheckI][app.CheckJ].left, app.chessMatrix[app.CheckI][app.CheckJ].top, app.chessMatrix[app.CheckI][app.CheckJ].id) != 0) {
+                                            //nếu trên đường đi có vật cản thì flag = false
+                                            flag1 = false;
+                                        }
+                                    }
+                                    if (flag1 == true) {
+                                        app.getIndex(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top + (length * app.squares), "stop");
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            console.log('hasChessNode: ' + app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id))
+                                            console.log('check i j= ' + app.CheckI + ' ' + app.CheckJ + ' StopI=' + app.indexStopI + ' StopJ=' + app.indexStopJ + ' chess node id: ' + app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            //app.getIndex((app.chessMatrix[app.indexStartI][app.indexStartJ].left), (app.chessMatrix[app.indexStartI][app.indexStartJ].top - (length * app.squares)), "stop");
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                        else {
+                                            app.revert(originalleft, originaltop, this.id);
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
                         if (this.id.indexOf("tuongden") >= 0) {
                             console.log("J:" + (app.indexStopJ - app.indexStartJ));
                             console.log("I:" + (app.indexStopI - app.indexStartI));
@@ -884,6 +1684,105 @@
                                 }
                             }
 
+                        }
+                        if (this.id.indexOf("tuongdo") >= 0) {
+                            console.log("J:" + (app.indexStopJ - app.indexStartJ));
+                            console.log("I:" + (app.indexStopI - app.indexStartI));
+                            console.log('xStop-xStart= ' + Math.abs(app.indexStopJ - app.indexStartJ) + '  yStop-yStart= ' + Math.abs(app.indexStopI - app.indexStartI) + " Giá trị tuyệt đối");
+                            if ((Math.abs(app.indexStopI - app.indexStartI) == 2 && Math.abs(app.indexStopJ - app.indexStartJ) == 2) && (app.indexStopI < 5)) {
+                                //TH1 phải trên
+                                if ((app.indexStopJ - app.indexStartJ == 2) && (app.indexStopI - app.indexStartI) == -2) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top - app.squares, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left + app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top - app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                //TH2 trái trên
+                                if ((app.indexStopJ - app.indexStartJ == -2) && (app.indexStopI - app.indexStartI) == -2) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top - app.squares, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left - app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top - app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                //TH3 phải dưới
+                                if ((app.indexStopJ - app.indexStartJ == 2) && (app.indexStopI - app.indexStartI) == 2) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top + app.squares, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left + app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top + app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                                //TH4 trái dưới
+                                if ((app.indexStopJ - app.indexStartJ == -2) && (app.indexStopI - app.indexStartI) == 2) {
+                                    console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
+                                    if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left - app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top + app.squares, "check") == 0) {
+                                        app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left - app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top + app.squares), "stop");
+                                        console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
+                                        console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
+                                        if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
+                                            app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
+                                            app.revert(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, this.id)
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", this.id);
+                                            app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
+                                            app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
+                                            flag = true;
+                                            return;
+                                        }
+                                    }
+                                    else {
+                                        app.revert(originalleft, originaltop, this.id);
+                                        return;
+                                    }
+                                }
+                            }
                         }
                         if (flag == true) {
                             

@@ -445,7 +445,7 @@
                                         return;
                                     }
                                 }
-                                if ((app.indexStopJ - app.indexStartJ == 2 && app.indexStopI - app.indexStartI) == -1) {
+                                if ((app.indexStopJ - app.indexStartJ) == 2 && (app.indexStopI - app.indexStartI) == -1) {
                                     console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
                                     if (app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].top, "check") == 0) {
                                         app.getIndex((app.chessMatrix[app.indexStopI][app.indexStopJ].left + app.squares), (app.chessMatrix[app.indexStopI][app.indexStopJ].top - app.squares), "stop");

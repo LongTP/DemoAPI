@@ -1909,7 +1909,7 @@
                     app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
 
                     app.getIndex(result[i].left, result[i].top, "stop");
-                    if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 0) {
+                    if (app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
                         app.deleteChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].id);
                     }
                     app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "id", result[i].id);

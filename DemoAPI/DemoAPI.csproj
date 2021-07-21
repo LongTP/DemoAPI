@@ -196,7 +196,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Hub\Requestlog.cs" />
+    <Compile Include="Hubs\MyGroupHub.cs" />
+    <Compile Include="Hubs\Requestlog.cs" />
     <Compile Include="Models\ChessNode.cs" />
     <Compile Include="Models\ClassRoomModel.cs" />
     <Compile Include="Models\MoveModel.cs" />

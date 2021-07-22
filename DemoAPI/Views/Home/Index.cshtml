@@ -186,6 +186,7 @@
                     console.log(strMatrix);
                 }
             },
+            
             initPoint(left, top, chessNodeId) {
                 let temp = {};
                 temp.top = top;
@@ -298,8 +299,20 @@
             },
             deleteChessNode(id) {
                 var node = $("#" + id);
-                node.css({ 'display': 'none' })
+                if (id == "chutuongdo") {
+                    alert("Đen thắng");
+                    app.pauseChess();
+                }
+                if (id == "chutuongden") {
+                    alert("Đỏ thắng");
+                    app.pauseChess();
+                }
+                node.css({ 'display': 'none' });
+            },
+            pauseChess() {
+                $(".chessnode").draggable("disable");
             }
+           
            
         },
         updated: function () {
@@ -320,7 +333,6 @@
                     app.indexStopJ = -1;
                     app.CheckI = -1;
                     app.CheckJ = -1;
-                    
                     app.getIndex(ui.position.left, ui.position.top, "stop");
 
                     if (app.indexStopI != -1 && app.indexStopJ != -1) {
@@ -1920,6 +1932,7 @@
                     //node.css({ 'top': result[i].top + 'px, left: ' + result[i].left + 'px, display:' + result[i].visible});
                     break;
                 }
+                
                 app.turn++;
                 console.log('turn: ' + app.turn);
             };

@@ -35,7 +35,9 @@
         margin-left:850px;
         
     }
-
+    .highlight {
+        box-shadow: inset 0 0 3px 3px white;
+    }
 </style>
 
 
@@ -186,7 +188,7 @@
                     console.log(strMatrix);
                 }
             },
-            
+
             initPoint(left, top, chessNodeId) {
                 let temp = {};
                 temp.top = top;
@@ -311,13 +313,30 @@
             },
             pauseChess() {
                 $(".chessnode").draggable("disable");
+            },
+            highlight() {
+                $(".chessnode").hover(
+                    function () {
+
+                        //console.log('top=' + this.offsetTop  + '  left= ' + this.offsetLeft);
+                        $(this).addClass("highlight");
+                            
+                        //return this.id;
+                    },
+                    function () {
+                        {
+                            $(this).removeClass("highlight");
+                                    
+                        }
+                    })
             }
-           
-           
+            
         },
         updated: function () {
             var originaltop = 0;
             var originalleft = 0;
+            app.highlight();
+            
             $(".chessnode").draggable({
                 start: function (event, ui) {
                     originaltop = ui.position.top;
@@ -328,7 +347,7 @@
                 },
                 stop: function (event, ui) {
                     /*console.log('x=' + ui.position.top + '  y=' + ui.position.left);*/
-
+                    
                     app.indexStopI = -1;
                     app.indexStopJ = -1;
                     app.CheckI = -1;

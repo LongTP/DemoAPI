@@ -76,10 +76,10 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var _name = window.prompt("Please Enter your name");
-        var _group = window.prompt("Please Enter Group name");
+        
 
         $("#spnName").text(_name);
-        $("#GroupName").text(_group);
+        $("#GroupName").text(localStorage.wesite);
         $('#txtMsg').val('');
 
         //Get proxy instance using the auto-generated proxy class

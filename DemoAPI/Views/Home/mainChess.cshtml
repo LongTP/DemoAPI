@@ -84,9 +84,11 @@
 
             var col1 = currentRow.find("td:eq(0)").html();
             var col2 = currentRow.find("td:eq(1)").html();
+            localStorage.wesite = col2;
 
             $("#id1").val(col1);
             $("#id2").val(col2);
+            document.location = '@Url.Action("Index","Home")';
         });
     });
 

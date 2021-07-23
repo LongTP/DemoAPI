@@ -40,6 +40,7 @@ namespace DemoAPI.Controllers.api
                 data = roomList //_dbContext.Student.OrderBy(s=>s.Id).Skip(2).Take(3).ToList() //Where(s=>s.Id == Guid.Parse(id)).FirstOrDefault()
             }, JsonRequestBehavior.AllowGet);
         }
+
         [Route("api/chess/getchessnode")]
         [HttpPost]
         public ActionResult getAllNode(List<MoveModel> movelist)

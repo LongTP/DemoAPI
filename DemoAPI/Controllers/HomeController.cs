@@ -32,6 +32,13 @@ namespace DemoAPI.Controllers
 
             return View();
         }
+        public ActionResult mainChess()
+        {
+
+
+
+            return View();
+        }
         public void insertRoom() {
             Room r = new Room();
             r.Id = Guid.NewGuid();

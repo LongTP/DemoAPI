@@ -43,7 +43,7 @@
 
 
 <div id="app">
-    <h4 id="turn">Turn:</h4>
+    <h4 id="turn"></h4>
     <div class="chessboard">
 
         <div v-for="item in chessNode" v-if="item !== null" :id="item.id" class="chessnode" v-bind:style="{ display: item.visible, top: item.top + 'px', left: item.left + 'px'}">
@@ -304,10 +304,16 @@
                 var node = $("#" + id);
                 if (id == "chutuongdo") {
                     alert("Đen thắng");
+                    app.turn = -1;
+                    document.getElementById('turn').innerText = "Đen thắng";
+                    document.getElementById('turn').style.color = "black";
                     app.pauseChess();
                 }
                 if (id == "chutuongden") {
                     alert("Đỏ thắng");
+                    app.turn = -1;
+                    document.getElementById('turn').innerText = "Đỏ thắng";
+                    document.getElementById('turn').style.color = "red";
                     app.pauseChess();
                 }
                 node.css({ 'display': 'none' });
@@ -1962,9 +1968,9 @@
                     //node.css({ 'top': result[i].top + 'px, left: ' + result[i].left + 'px, display:' + result[i].visible});
                     break;
                 }
-                
-                app.turn++;
                 app.changeTextTurn();
+                app.turn++;
+                
                 console.log('turn: ' + app.turn);
             };
             this.getchessNode();

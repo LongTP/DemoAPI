@@ -2,47 +2,47 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
 <script src="~/Scripts/jquery-3.4.1.js"></script>
+<link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div id="app">
-
-    <input v-on:click="getList" type="button" value="Get List" />
-    <table id="myTable" class="table table-striped table-dark">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">#</th>
-                <th scope="col">#</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr id="info1" v-for="item in rooms" v-if="item !== null">
-                <td class="id"> {{item.Name}}</td>
-                <td class="name"> {{item.Id}}</td>
-                <td>
-                    <button class="btnSelect">Select</button>
-                </td>
-            </tr>
-        </tbody>
-
-    </table>
-    <div class="input-group input-group-sm mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
-        </div>
-        <input id="id1" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+<body>
+    <div class="jumbotron" style="background-color: #192634; color: white; font-family: Arial">
+        <h1>ĐỒ ÁN QUẢN LÝ </h1>
+        <p class="lead">NO HOPE - CHESS</p>
+        <h4> Room name:</h4>
+        <input style="color: black" v-model="Room" type="text" value="" />
+        <br />
+        <input class="btn-info" v-on:click="insertRoom" type="button" value="Insert Room" />
     </div>
-    <div class="input-group input-group-sm mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
-        </div>
-        <input id="id2" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
+    <div id="app">
+        <input v-on:click="getList" type="button" value="Get List" />
+        <table id="myTable" class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">#</th>
+                    <th scope="col">#</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="info1" v-for="item in rooms" v-if="item !== null">
+                    <td class="id"> {{item.Name}}</td>
+                    <td class="name"> {{item.Id}}</td>
+                    <td>
+                        <button class="btnSelect">Select</button>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+
     </div>
-    Room name: <input v-model="Room" type="text" value="" />
-    <input v-on:click="insertRoom" type="button" value="Insert Room" />
-</div>
+</body>
 
 <script>
 

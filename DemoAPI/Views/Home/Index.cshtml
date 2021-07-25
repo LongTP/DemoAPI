@@ -2,82 +2,70 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/Scripts/jquery.signalR-2.4.2.js"></script>
 <script src="/signalr/hubs"></script>
-<style>
-    .chessboard {
-        width: 850px;
-        height: 850px;
-        background-image: url('/Images/bancotuong.jpg');
-        position: absolute;
-    }
+<link href="~/Content/reset.min.css" rel="stylesheet" />
+<link href="~/Content/Game.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+<body>
 
-    .chessnode {
-        position: absolute;
-        width: 50px;
-        height: 50px;
-    }
-
-    .chessimgnode {
-        width: 50px;
-        height: 50px;
-    }
-    .users-online {
-        width: 300px;
-        border: solid 1px Red;
-        height: 50px;
-        margin-left:850px;
-        margin-top:50px
-
-    }
-    .message-box {
-        width: 300px;
-        border: solid 1px Red;
-        height: 600px;
-        margin-left:850px;
+    <div id="app">
         
-    }
-    .highlight {
-        box-shadow: inset 0 0 3px 3px white;
-    }
-</style>
+        <div class="chessboard">
 
+            <div v-for="item in chessNode" v-if="item !== null" :id="item.id" class="chessnode" v-bind:style="{ display: item.visible, top: item.top + 'px', left: item.left + 'px'}">
+                <img :src="'/' + item.src" class="chessimgnode" />
+            </div>
 
-
-<div id="app">
-    <h4 id="turn">Turn:</h4>
-    <div class="chessboard">
-
-        <div v-for="item in chessNode" v-if="item !== null" :id="item.id" class="chessnode" v-bind:style="{ display: item.visible, top: item.top + 'px', left: item.left + 'px'}">
-            <img :src="'/' + item.src" class="chessimgnode" />
-        </div>
-        <div class="users-online">
-            <h3 style="margin: 10px 0px 0px 10px">
-                <span id="spnName"></span>
-                <span id="GroupName" style="margin-left:25px;"></span>
-            </h3>
-        </div>
-        
-        <div class="message-box">
-            <div style="height: auto" id="divUsers"></div>
-            <div style="height: 70%" id="divChat"></div>
-            <div style="border: dashed 1px Black; margin-top:5%;">
-                <div style="float: left; width: 25%; padding: 4px">
-                    @*<input type="text" style="width: 100%" id="txtTo" />*@
-                    <p>Message: </p>
+            <div class="users-online1">
+                <div style="padding-top: 20px">
+                    <p>
+                        Lượt đi:
+                        <span style="margin-left:25px;" id="turn"> TURN </span>
+                    </p>
                 </div>
-                <div style="float: left; width: 55%; padding: 4px">
-                    <input type="text" style="width: 100%" id="txtMsg" />
+            </div>
+            <div class="users-online">
+                <div style="padding-top: 20px">
+                    <p>
+                        Người Chơi:
+                        <span id="spnName" style="margin-left:25px;"></span>
+                    </p>
                 </div>
-                <div style="float: right; width: 15%; padding: 4px">
-                    <input type="button" id="btnSend" value="Send Message" style="width: 45px" />
+                <div>
+                    <p style="padding-top: 20px">
+                        Mã Room:
+                        <span id="GroupName" style="margin-left:25px;"></span>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="message-box">
+                <div style="height: auto" id="divUsers"></div>
+                <div class="divChat1" id="divChat"></div>
+
+                <div style="border-top: dashed 1px White; margin-top:5%; background-color: white; height: 70px;">
+
+                    <div style="float: left; width: 25%; padding: 4px">
+                        <p style="color: black;">Message: </p>
+                    </div>
+
+                    <div data-spy="scroll" style=" width: 100%; padding: 4px; color: black;">
+                        <input type="text" style="width: 100%" id="txtMsg" />
+                    </div>
+
+                    <div style="float: left; width: 15%; padding: 4px; color: black;padding-left: 100px;">
+                        <input type="button" id="btnSend" value="Send Message" style="width: 45px" />
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-</div>
+</body>
+
 <script type="text/javascript">
     $(document).ready(function () {
         var _name = window.prompt("Please Enter your name");
-        
+
 
         $("#spnName").text(_name);
         $("#GroupName").text(localStorage.wesite);
@@ -320,7 +308,7 @@
                     function () {
                         $(this).addClass("highlight");
 
-                        //console.log('top=' + this.offsetTop  + '  left= ' + this.offsetLeft);                    
+                        //console.log('top=' + this.offsetTop  + '  left= ' + this.offsetLeft);
                         //return this.id;
                     },
                     function () {
@@ -333,21 +321,22 @@
                 //document.getElementById('turn').innerHTML += value;
                 if (app.turn % 2 == 0) {
                     document.getElementById('turn').innerText = "Turn đen";
-                    document.getElementById('turn').style.color = "black";
+                    document.getElementById('turn').style.color = "white";
+                    
                 }
                 if (app.turn % 2 == 1) {
                     document.getElementById('turn').innerText = "Turn đỏ";
                     document.getElementById('turn').style.color = "red";
                 }
             }
-            
+
         },
         updated: function () {
             var originaltop = 0;
             var originalleft = 0;
             app.highlight();
             app.changeTextTurn();
-           
+
             $(".chessnode").draggable({
                 start: function (event, ui) {
                     originaltop = ui.position.top;
@@ -358,7 +347,7 @@
                 },
                 stop: function (event, ui) {
                     /*console.log('x=' + ui.position.top + '  y=' + ui.position.left);*/
-                    
+
                     app.indexStopI = -1;
                     app.indexStopJ = -1;
                     app.CheckI = -1;
@@ -385,7 +374,7 @@
 
                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                 flag = true;
-                                
+
                             }
                         }
                         if (this.id.indexOf("chutuongden") >= 0 && (app.turn % 2 == 0)) {
@@ -402,9 +391,9 @@
                                 app.$set(app.chessMatrix[app.indexStopI][app.indexStopJ], "visible", "inline");
                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
-                                
+
                                 flag = true;
-                                
+
                             }
                         }
 
@@ -426,7 +415,7 @@
 
 
                                     flag = true;
-                                    
+
                                 }
                             }
                             if (app.indexStartI <= 4) {
@@ -448,7 +437,7 @@
                             }
 
                         }
-                        
+
                         if (this.id.indexOf("totdo") >= 0 && (app.turn % 2 == 1)) {
                             console.log('x stop= ' + app.indexStopJ + '  y stop= ' + app.indexStopI);
                             console.log('x start= ' + app.indexStartJ + '  y start= ' + app.indexStartI);
@@ -464,7 +453,7 @@
                                     app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                     app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                     flag = true;
-                                    
+
                                 }
                             }
                             if (app.indexStartI >= 5) {
@@ -479,7 +468,7 @@
                                     app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                     app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                     flag = true;
-                                   
+
                                 }
                             }
                         }
@@ -497,7 +486,7 @@
                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                 flag = true;
-                               
+
                             }
                             if ((app.indexStopI - app.indexStartI == 1 && app.indexStopJ - app.indexStartJ == -1 || app.indexStopI - app.indexStartI == -1 && app.indexStopJ - app.indexStartJ == 1) && (app.indexStopJ >= 3 && app.indexStopJ <= 5 && app.indexStopI >= 7 && app.indexStopI <= 9) &&
                                 app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
@@ -509,7 +498,7 @@
                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                 flag = true;
-                                
+
                             }
                         }
                         if (this.id.indexOf("sido") >= 0 && (app.turn % 2 == 1)) {
@@ -524,7 +513,7 @@
                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                 flag = true;
-                                
+
                             }
                             if ((app.indexStopI - app.indexStartI == 1 && app.indexStopJ - app.indexStartJ == -1 || app.indexStopI - app.indexStartI == -1 && app.indexStopJ - app.indexStartJ == 1) && (app.indexStopJ >= 3 && app.indexStopJ <= 5 && app.indexStopI >= 0 && app.indexStopI <= 2) &&
                                 app.hasChessNode(app.chessMatrix[app.indexStopI][app.indexStopJ].left, app.chessMatrix[app.indexStopI][app.indexStopJ].top, app.chessMatrix[app.indexStartI][app.indexStartJ].id) != 1) {
@@ -536,7 +525,7 @@
                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                 flag = true;
-                                
+
                             }
                         }
                         if (this.id.indexOf("maden") >= 0 && (app.turn % 2 == 0)) {
@@ -560,12 +549,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                           
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                       
+
                                     }
                                 }
                                 if ((app.indexStopJ - app.indexStartJ) == 2 && (app.indexStopI - app.indexStartI) == -1) {
@@ -582,12 +571,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                          
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                        
+
                                     }
                                 }
                                 //TH2 trái trên -1 , -2
@@ -605,12 +594,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                           
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                        
+
                                     }
                                 }
                                 //TH2 trái trên -2 , -1
@@ -628,7 +617,7 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                          
+
                                         }
                                     }
                                     console.log('hasBlockNode: ' + app.hasChessNode(app.chessMatrix[app.indexStartI][app.indexStartJ].left, app.chessMatrix[app.indexStartI][app.indexStartJ].top + app.squares, app.chessMatrix[app.indexStartI][app.indexStartJ].id));
@@ -644,12 +633,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                            
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                       
+
                                     }
                                 }
                                 //TH3 phải dưới 2 , 1
@@ -667,12 +656,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                           
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                        
+
                                     }
                                 }
                                 //TH4 trái dưới -1 , 2
@@ -690,12 +679,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                           
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                        
+
                                     }
                                 }
                                 //TH4 trái dưới -2 , 1
@@ -713,12 +702,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                            
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                        
+
                                     }
                                 }
                             }
@@ -744,12 +733,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                          
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                        
+
                                     }
                                 }
                                 //TH1 phải trên 2 , -1
@@ -767,12 +756,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                         
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                       
+
                                     }
                                 }
                                 //TH2 trái trên -1 , -2
@@ -790,12 +779,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                         
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                        
+
                                     }
                                 }
                                 //TH2 trái trên -2 , -1
@@ -813,12 +802,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                        
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                        
+
                                     }
                                 }
                                 //TH3 phải dưới 1 , 2
@@ -836,12 +825,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                        
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                        
+
                                     }
                                 }
                                 //TH3 phải dưới 2 , 1
@@ -859,12 +848,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                         
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                        
+
                                     }
                                 }
                                 //TH4 trái dưới -1 , 2
@@ -882,12 +871,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                        
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                        
+
                                     }
                                 }
                                 //TH4 trái dưới -2 , 1
@@ -905,12 +894,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                         
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                        
+
                                     }
                                 }
                             }
@@ -950,11 +939,11 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                          
+
                                         }
                                         else {
                                             app.revert(originalleft, originaltop, this.id);
-                                            
+
                                         }
                                     }
                                     if (flag1 == false) {
@@ -971,11 +960,11 @@
                                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                                 flag = true;
-                                               
+
                                             }
                                             else {
                                                 app.revert(originalleft, originaltop, this.id);
-                                              
+
                                             }
 
                                         }
@@ -1009,11 +998,11 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                          
+
                                         }
                                         else {
                                             app.revert(originalleft, originaltop, this.id);
-                                           
+
                                         }
                                     }
 
@@ -1032,11 +1021,11 @@
                                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                                 flag = true;
-                                              
+
                                             }
                                             else {
                                                 app.revert(originalleft, originaltop, this.id);
-                                               
+
                                             }
                                         }
                                     }
@@ -1069,11 +1058,11 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                           
+
                                         }
                                         else {
                                             app.revert(originalleft, originaltop, this.id);
-                                          
+
                                         }
                                     }
                                     if (flag1 == false) {
@@ -1090,11 +1079,11 @@
                                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                                 flag = true;
-                                               
+
                                             }
                                             else {
                                                 app.revert(originalleft, originaltop, this.id);
-                                               
+
                                             }
 
                                         }
@@ -1127,11 +1116,11 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                           
+
                                         }
                                         else {
                                             app.revert(originalleft, originaltop, this.id);
-                                           
+
                                         }
                                     }
                                     if (flag1 == false) {
@@ -1149,11 +1138,11 @@
                                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                                 flag = true;
-                                              
+
                                             }
                                             else {
                                                 app.revert(originalleft, originaltop, this.id);
-                                              
+
                                             }
 
                                         }
@@ -1194,11 +1183,11 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                         
+
                                         }
                                         else {
                                             app.revert(originalleft, originaltop, this.id);
-                                           
+
                                         }
                                     }
                                     if (flag1 == false) {
@@ -1214,11 +1203,11 @@
                                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                                 flag = true;
-                                             
+
                                             }
                                             else {
                                                 app.revert(originalleft, originaltop, this.id);
-                                              
+
                                             }
                                         }
                                     }
@@ -1249,11 +1238,11 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                         
+
                                         }
                                         else {
                                             app.revert(originalleft, originaltop, this.id);
-                                    
+
                                         }
                                     }
                                     if (flag1 == false) {
@@ -1270,11 +1259,11 @@
                                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                                 flag = true;
-                                            
+
                                             }
                                             else {
                                                 app.revert(originalleft, originaltop, this.id);
-                                         
+
                                             }
                                         }
                                     }
@@ -1305,11 +1294,11 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                         
+
                                         }
                                         else {
                                             app.revert(originalleft, originaltop, this.id);
-                                            
+
                                         }
                                     }
                                     if (flag1 == false) {
@@ -1325,11 +1314,11 @@
                                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                                 flag = true;
-                                            
+
                                             }
                                             else {
                                                 app.revert(originalleft, originaltop, this.id);
-                                                
+
                                             }
                                         }
                                     }
@@ -1359,11 +1348,11 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                         
+
                                         }
                                         else {
                                             app.revert(originalleft, originaltop, this.id);
-                                         
+
                                         }
                                     }
                                     if (flag1 == false) {
@@ -1380,11 +1369,11 @@
                                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                                 app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                                 flag = true;
-                                             
+
                                             }
                                             else {
                                                 app.revert(originalleft, originaltop, this.id);
-                                              
+
                                             }
                                         }
                                     }
@@ -1427,12 +1416,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                         
+
 
                                         }
                                         else {
                                             app.revert(originalleft, originaltop, this.id);
-                                           
+
                                         }
 
                                     }
@@ -1465,11 +1454,11 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                         
+
                                         }
                                         else {
                                             app.revert(originalleft, originaltop, this.id);
-                                           
+
                                         }
                                     }
                                 }
@@ -1500,12 +1489,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                          
+
 
                                         }
                                         else {
                                             app.revert(originalleft, originaltop, this.id);
-                                           
+
                                         }
                                     }
                                 }
@@ -1536,12 +1525,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                        
+
 
                                         }
                                         else {
                                             app.revert(originalleft, originaltop, this.id);
-                                            
+
                                         }
                                     }
                                 }
@@ -1579,11 +1568,11 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                          
+
                                         }
                                         else {
                                             app.revert(originalleft, originaltop, this.id);
-                                            
+
                                         }
                                     }
                                 }
@@ -1613,11 +1602,11 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                          
+
                                         }
                                         else {
                                             app.revert(originalleft, originaltop, this.id);
-                                            
+
                                         }
                                     }
                                 }
@@ -1647,11 +1636,11 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                           
+
                                         }
                                         else {
                                             app.revert(originalleft, originaltop, this.id);
-                                           
+
                                         }
                                     }
                                 }
@@ -1681,11 +1670,11 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                            
+
                                         }
                                         else {
                                             app.revert(originalleft, originaltop, this.id);
-                                           
+
                                         }
                                     }
                                 }
@@ -1718,12 +1707,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                          
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                      
+
                                     }
                                 }
                                 //TH2 trái trên
@@ -1745,12 +1734,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                         
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                       
+
                                     }
                                 }
                                 //TH3 phải dưới
@@ -1772,12 +1761,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                          
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                       
+
                                     }
                                 }
                                 //TH4 trái dưới
@@ -1799,12 +1788,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                          
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                       
+
                                     }
                                 }
                             }
@@ -1830,12 +1819,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                         
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                        
+
                                     }
                                 }
                                 //TH2 trái trên
@@ -1853,12 +1842,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                          
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                       
+
                                     }
                                 }
                                 //TH3 phải dưới
@@ -1876,12 +1865,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                         
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                       
+
                                     }
                                 }
                                 //TH4 trái dưới
@@ -1899,12 +1888,12 @@
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "id", "");
                                             app.$set(app.chessMatrix[app.indexStartI][app.indexStartJ], "visible", "");
                                             flag = true;
-                                           
+
                                         }
                                     }
                                     else {
                                         app.revert(originalleft, originaltop, this.id);
-                                        
+
                                     }
                                 }
                             }
@@ -1912,7 +1901,7 @@
                         if (flag == true) {
 
                             var res = axios.post('/api/chess/movenode', movelist).then(response => {
-                                
+
                                 //this.chessRoom = response.data.data;
                                 //alert(response);
 
@@ -1962,7 +1951,7 @@
                     //node.css({ 'top': result[i].top + 'px, left: ' + result[i].left + 'px, display:' + result[i].visible});
                     break;
                 }
-                
+
                 app.turn++;
                 app.changeTextTurn();
                 console.log('turn: ' + app.turn);

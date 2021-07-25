@@ -30,7 +30,7 @@ namespace DemoAPI.Hubs
         public void Get_Connect(String username, String userid, String connectionid, String GroupName)
         {
             string count = "NA";
-            string msg = "Welcome to group " + GroupName;
+            string msg = "Welcome to room user : " + username;
             string list = "";
 
             var id = Context.ConnectionId;
@@ -40,7 +40,7 @@ namespace DemoAPI.Hubs
             Exceptional[0] = id;
 
             Clients.Caller.receiveMessage("Group Chat Hub", msg, list);
-            Clients.OthersInGroup(GroupName).receiveMessage("NewConnection", GroupName + " " + username + " " + id, count);
+            Clients.OthersInGroup(GroupName).receiveMessage("NewConnection", username + " " + " enter room " , count);
             //Clients.AllExcept(Exceptional).receiveMessage("NewConnection", username + " " + id, count);
         }
 
@@ -48,7 +48,7 @@ namespace DemoAPI.Hubs
         {
             //string username = Context.QueryString["username"].ToString();
             string clientId = Context.ConnectionId;
-            string data = clientId;
+            string data = "wtf";
             string count = "NA";
             Clients.Caller.receiveMessage("ChatHub", data, count);
             return base.OnConnected();
@@ -67,7 +67,7 @@ namespace DemoAPI.Hubs
             string clientId = Context.ConnectionId;
             string[] Exceptional = new string[1];
             Exceptional[0] = clientId;
-            Clients.AllExcept(Exceptional).receiveMessage("NewConnection", clientId + " leave", count);
+            Clients.AllExcept(Exceptional).receiveMessage("NewConnection", " leave", count);
 
             return base.OnDisconnected(stopCalled);
         }

@@ -40,7 +40,7 @@
             
             <div class="message-box">
                 <div style="height: auto" id="divUsers"></div>
-                <div class="divChat1" id="divChat"></div>
+                <div class="divChat1" id="divChat" style="overflow:auto"></div>
 
                 <div style="border-top: dashed 1px White; margin-top:5%; background-color: white; height: 70px;">
 
@@ -92,7 +92,7 @@
         chatProxy.client.receiveMessage = function (msgFrom, msg, senderid) {
             if (msgFrom == "NewConnection") {
                 $("#usersCount").text(senderid);
-                $('#divUsers').append('<li>' + msg + '</li>')
+                $('#divChat').append('<li>' + msg + '</li>')
             }
             else if (msgFrom == "ChatHub") {
                 $("#usersCount").text(senderid);
@@ -102,7 +102,7 @@
                 var online = senderid.split('#');
                 var length = online.length;
                 for (var i = 0; i < length; i++) {
-                    $('#divUsers').append('<li>' + online[i] + '</li>')
+                    $('#divChat').append('<li>' + online[i] + '</li>')
                 }
 
                 $('#divChat').append('<li><strong>' + msgFrom

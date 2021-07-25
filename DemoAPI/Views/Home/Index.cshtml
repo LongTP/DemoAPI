@@ -304,14 +304,14 @@
                 var node = $("#" + id);
                 if (id == "chutuongdo") {
                     alert("Đen thắng");
-                    app.turn = -1;
+                    app.turn = -2;
                     document.getElementById('turn').innerText = "Đen thắng";
                     document.getElementById('turn').style.color = "black";
                     app.pauseChess();
                 }
                 if (id == "chutuongden") {
                     alert("Đỏ thắng");
-                    app.turn = -1;
+                    app.turn = -2;
                     document.getElementById('turn').innerText = "Đỏ thắng";
                     document.getElementById('turn').style.color = "red";
                     app.pauseChess();
@@ -1961,9 +1961,9 @@
                     //node.css({ 'top': result[i].top + 'px, left: ' + result[i].left + 'px, display:' + result[i].visible});
                     break;
                 }
-                app.changeTextTurn();
-                app.turn++;
                 
+                app.turn++;
+                app.changeTextTurn();
                 console.log('turn: ' + app.turn);
             };
             this.getchessNode();

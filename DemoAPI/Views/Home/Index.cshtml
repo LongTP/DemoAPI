@@ -5,6 +5,12 @@
 <link href="~/Content/reset.min.css" rel="stylesheet" />
 <link href="~/Content/Game.css" rel="stylesheet" />
 <script src="~/Scripts/bootstrap.min.js"></script>
+<style>
+    p {
+        padding-left: 10px;
+    }
+
+</style>
 <body>
 
     <div id="app">
@@ -15,15 +21,15 @@
                 <img :src="'/' + item.src" class="chessimgnode" />
             </div>
 
-            <div class="users-online1">
-                <div style="padding-top: 20px">
-                    <p>
+            <div class="users-online1" >
+                <div style="padding-top: 10px">
+                    <p style="text-align: center; padding: 20px;" >
                         Lượt đi:
-                        <span style="margin-left:25px;" id="turn"> TURN </span>
+                        <span style="margin-left:5px" id="turn" > TURN </span>
                     </p>
                 </div>
             </div>
-            <div class="users-online">
+            <div class="users-online" style="margin-top:10px">
                 <div style="padding-top: 20px">
                     <p>
                         Người Chơi:
@@ -33,7 +39,7 @@
                 <div>
                     <p style="padding-top: 20px">
                         Mã Room:
-                        <span id="GroupName" style="margin-left:25px;"></span>
+                        <span id="GroupName" style="margin-left:10px;"></span>
                     </p>
                 </div>
             </div>
@@ -53,7 +59,7 @@
                     </div>
 
                     <div style="float: left; width: 15%; padding: 4px; color: black;padding-left: 100px;">
-                        <input type="button" id="btnSend" value="Send Message" style="width: 45px" />
+                        <input type="submit" id="btnSend" value="Send" style="width: 60px" />
                     </div>
 
                 </div>
@@ -92,7 +98,7 @@
         chatProxy.client.receiveMessage = function (msgFrom, msg, senderid) {
             if (msgFrom == "NewConnection") {
                 $("#usersCount").text(senderid);
-                $('#divChat').append('<li>' + msg + '</li>')
+                $('#divChat').append('<br><p>' + msg + '<p>')
             }
             else if (msgFrom == "ChatHub") {
                 $("#usersCount").text(senderid);
@@ -102,16 +108,16 @@
                 var online = senderid.split('#');
                 var length = online.length;
                 for (var i = 0; i < length; i++) {
-                    $('#divChat').append('<li>' + online[i] + '</li>')
+                    $('#divChat').append('<p>' + online[i] + '<p>')
                 }
 
-                $('#divChat').append('<li><strong>' + msgFrom
-                    + '</strong>:&nbsp;&nbsp;' + msg + '</li>')
+                $('#divChat').append('<br><p><strong>' + msgFrom
+                    + '</strong>:&nbsp;&nbsp;' + msg + '<p><br>')
             }
             else {
                 $("#txtTo").val(senderid);
-                $('#divChat').append('<li><strong>' + msgFrom
-                    + '</strong>:&nbsp;&nbsp;' + msg + '</li>')
+                $('#divChat').append('<br><p><strong>' + msgFrom
+                    + '</strong>:&nbsp;&nbsp;' + msg + '</li><br>')
             }
         };
     });
